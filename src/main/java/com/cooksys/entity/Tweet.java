@@ -6,8 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class Tweet {
 	@Column
 	private String context;
 	
+	@Column
+	private String label;
+	
 //	@Column
 //	private Tweet inrepyof;
 //	
@@ -36,14 +41,26 @@ public class Tweet {
 	@Column
 	private boolean tweetstatus;
 	
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 	@ManyToMany(mappedBy = "tweet")
 	private List<Users> users;
 
-	@ManyToMany
-	@JoinTable
-	private List<Hashtag> hashtag;
+//	@ManyToOne
+//	@JoinColumn
+//	private Hashtag hashtag;
 	
-	public List<Hashtag> getHashtag() {
+	@ManyToMany
+	@JoinTable(name = "tweethashtags")
+	private List<Hashtag> hashtag;
+
+	public List<Hashtag> getHashtags() {
 		return hashtag;
 	}
 

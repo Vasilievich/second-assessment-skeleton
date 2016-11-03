@@ -7,4 +7,4 @@ insert into second_assignment.hashtag (id, label, hashtagstatus) values (1,'what
 
 insert into second_assignment.usertweets (users_id, tweet_id) values (1, 1);
 
-insert into second_assignment.tweet_hashtag (tweet_id, hashtag_id) values (1, 1);
+insert into second_assignment.tweethashtags (tweet_id, hashtag_id) values (1, 1);

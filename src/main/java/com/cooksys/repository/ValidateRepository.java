@@ -8,7 +8,7 @@ import com.cooksys.entity.Users;
 
 public interface ValidateRepository extends JpaRepository<Tweet, Long> {
 	
-	Tweet findByLabel(String label);
+	//Tweet findByLabel(String label);
 	
 //	Users findByUsername(String username);
 	

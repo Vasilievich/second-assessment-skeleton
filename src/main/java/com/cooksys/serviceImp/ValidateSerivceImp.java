@@ -3,35 +3,39 @@ package com.cooksys.serviceImp;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.entity.Hashtag;
-import com.cooksys.entity.Tweet;
 import com.cooksys.entity.Users;
+import com.cooksys.repository.TagsRepository;
+import com.cooksys.repository.UsersRepository;
 import com.cooksys.repository.ValidateRepository;
 import com.cooksys.service.ValidateService;
 
 @Service
 public class ValidateSerivceImp implements ValidateService {
 
-	ValidateRepository validRepo;
+	ValidateRepository userdRepo;
+	TagsRepository tagRepo;
+	UsersRepository userRepo;
 	
-	public ValidateSerivceImp (ValidateRepository validRepo) {
-		this.validRepo = validRepo;
+	public ValidateSerivceImp (TagsRepository tagsRepo, UsersRepository usersRepo) {
+		this.tagRepo = tagsRepo;
+		this.userRepo = usersRepo;
 	}
 	
 	@Override
-	public Tweet getTagsByLabel(String label) {
-		return validRepo.findByLabel(label);
+	public Hashtag getTagsByLabel(String label) {
+		return tagRepo.findByLabel(label);
 	}
 
-//	@Override
-//	public Users getUsersByUsername(String username) {
-//		return validRepo.findByUsername(username);
-//	}
-//	
-//	@Override
-//	public boolean getUsersAvailByUsername(String username1) {
-//		if(validRepo.findByUsername(username1) == null)
-//			return true;
-//		else 
-//			return false;
-//	}
+	@Override
+	public Users getUsersByUsername(String username) {
+		return userRepo.findByUsername(username);
+	}
+	
+	@Override
+	public boolean getUsersAvailByUsername(String username) {
+		if(userRepo.findByUsername(username) == null)
+			return true;
+		else 
+			return false;
+	}
 }

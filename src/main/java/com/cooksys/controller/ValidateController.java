@@ -18,19 +18,19 @@ public class ValidateController {
 		this.validateService = validService;
 	}
 	
-//	@GetMapping("/tag/exists/{label}")
-//	public boolean isTag(@PathVariable String label) {
-//		return validateService.getTagsByLabel(label).getHashtags().contains;
-//	}
+	@GetMapping("/tag/exists/{label}")
+	public boolean isTag(@PathVariable String label) {
+		return validateService.getTagsByLabel(label).isHashtagStatus();
+	}
 	
-//	@GetMapping("/username/exits/@{username}")
-//	public boolean isExistUser(@PathVariable String username) {
-//		return !validateService.getUsersByUsername(username).isDeleteStatus();
-//	}
-//	
-//	@GetMapping("/username/available/@{username}")
-//	public boolean isAvailUser(@PathVariable String username) {
-//		return validateService.getUsersAvailByUsername(username);
-//	}
+	@GetMapping("/username/exist/@{username}")
+	public boolean isExistUser(@PathVariable String username) {
+		return !validateService.getUsersByUsername(username).isActive();
+	}
+	
+	@GetMapping("/username/available/@{username}")
+	public boolean isAvailUser(@PathVariable String username) {
+		return !validateService.getUsersAvailByUsername(username);
+	}
 
 }

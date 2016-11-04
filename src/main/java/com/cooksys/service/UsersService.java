@@ -1,5 +1,12 @@
 package com.cooksys.service;
 
-public interface UsersService {
+import java.util.List;
 
+import com.cooksys.entity.Users;
+
+public interface UsersService {
+	
+	public List<Users> getAll();
+	
+	
 }

@@ -25,12 +25,9 @@ public class Tweet {
 	
 	@Column
 	private String posted;
-	
+
 	@Column
 	private String context;
-	
-	@Column
-	private String label;
 	
 //	@Column
 //	private Tweet inrepyof;
@@ -40,22 +37,10 @@ public class Tweet {
 	
 	@Column
 	private boolean tweetstatus;
-	
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
 
 	@ManyToMany(mappedBy = "tweet")
 	private List<Users> users;
 
-//	@ManyToOne
-//	@JoinColumn
-//	private Hashtag hashtag;
-	
 	@ManyToMany
 	@JoinTable(name = "tweethashtags")
 	private List<Hashtag> hashtag;
@@ -63,7 +48,7 @@ public class Tweet {
 	public List<Hashtag> getHashtags() {
 		return hashtag;
 	}
-
+	
 	public void setHashtag(List<Hashtag> hashtag) {
 		this.hashtag = hashtag;
 	}

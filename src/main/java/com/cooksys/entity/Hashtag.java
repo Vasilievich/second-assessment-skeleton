@@ -55,7 +55,4 @@ public class Hashtag {
 	public void setHashtagStatus(boolean hashtagStatus) {
 		hashtagstatus = hashtagStatus;
 	}
-
-
-
 }

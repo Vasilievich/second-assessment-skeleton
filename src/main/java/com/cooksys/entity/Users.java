@@ -17,34 +17,45 @@ public class Users {
 	@GeneratedValue
 	private Long id;
 	
-	@Column
+	@Column(name = "username")
 	private String username;
 
-	@Column
+	@Column(name = "firstname")
 	private String firstname;
 	
-	@Column
+	@Column(name = "lastname")
 	private String lastname;
 	
-	@Column
+	@Column(name = "email")
 	private String email;
 	
-	@Column
+	@Column(name = "phone")
 	private String phone;
 
-	@Column
+	@Column(name = "timestamps")
 	private String timestamps;
 	
-	@Column
+	@Column(name = "password")
 	private String password;
 	
-	@Column
-	private boolean deletestatus;
+	@Column(name = "active")
+	private boolean active;
 
 	@ManyToMany
 	@JoinTable(name = "usertweets")
 	private List<Tweet> tweet;
 	
+	public Users(Credentials credential, Profile profile, String time) {
+		this.username = credential.getUsername();
+		this.email = profile.getEmail();
+		this.timestamps = time;
+		this.firstname = profile.getFirstname();
+		this.lastname = profile.getLastname();
+		this.phone = profile.getPhone();
+		this.password = credential.getPassword();
+		this.active = true;
+		
+	}
 	
 //	@ManyToMany
 //	@JoinTable
@@ -123,12 +134,12 @@ public class Users {
 		this.username = username;
 	}
 
-	public boolean isDeleteStatus() {
-		return deletestatus;
+	public boolean isActive() {
+		return active;
 	}
 
-	public void setDeletestatus(boolean deletestatus) {
-		this.deletestatus = deletestatus;
+	public void setActive(boolean deletestatus) {
+		this.active = deletestatus;
 	}
 
 	public List<Tweet> getTweets() {

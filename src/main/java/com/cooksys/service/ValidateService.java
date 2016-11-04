@@ -6,11 +6,11 @@ import com.cooksys.entity.Users;
 
 public interface ValidateService {
 	
-	public Tweet getTagsByLabel(String label);
+	public Hashtag getTagsByLabel(String label);
 
-//	public Users getUsersByUsername(String username);
-//	
-//	public boolean getUsersAvailByUsername(String username1);
-//	
+	public Users getUsersByUsername(String username);
+	
+	public boolean getUsersAvailByUsername(String username1);
+	
 	
 }

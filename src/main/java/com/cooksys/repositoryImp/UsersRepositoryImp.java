@@ -27,4 +27,5 @@ public class UsersRepositoryImp implements UsersCustomRepository{
 		entityManager.persist(newUser);
 	}
 	
+	
 }

@@ -34,8 +34,8 @@ public class ValidateSerivceImp implements ValidateService {
 	@Override
 	public boolean getUsersAvailByUsername(String username) {
 		if(userRepo.findByUsername(username) == null)
-			return true;
-		else 
 			return false;
+		else 
+			return true;
 	}
 }

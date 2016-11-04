@@ -25,12 +25,12 @@ public class ValidateController {
 	
 	@GetMapping("/username/exist/@{username}")
 	public boolean isExistUser(@PathVariable String username) {
-		return !validateService.getUsersByUsername(username).isActive();
+		return validateService.getUsersByUsername(username).isActive();
 	}
 	
 	@GetMapping("/username/available/@{username}")
 	public boolean isAvailUser(@PathVariable String username) {
-		return !validateService.getUsersAvailByUsername(username);
+		return validateService.getUsersAvailByUsername(username);
 	}
 
 }

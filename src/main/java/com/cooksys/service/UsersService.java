@@ -9,4 +9,9 @@ public interface UsersService {
 	public List<Users> getAll();
 	
 	public Users getCreatedUser(Users user);
+	
+	public Users getAtUser(String atUser);
+	
+	public Users patchAtUser(Users updateUser, String atUser);
+	
 }

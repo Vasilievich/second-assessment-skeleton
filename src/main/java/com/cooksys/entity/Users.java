@@ -146,5 +146,4 @@ public class Users {
 	public void setTweets(List<Tweet> tweets) {
 		this.tweet = tweets;
 	}
-
 }

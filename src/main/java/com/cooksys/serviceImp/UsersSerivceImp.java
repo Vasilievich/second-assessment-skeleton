@@ -18,11 +18,12 @@ public class UsersSerivceImp implements UsersService{
 	}
 	
 	public List<Users> getAll() {
-		return userRepo.findAll();
+		return userRepo.findByActiveTrue();
 	}
 	
 	public Users getCreatedUser(Users user) {
-		
+		userRepo.createUsername(user.getUsername(), user.getEmail(), user.getPhone());
+		return userRepo.findByUsername(user.getUsername());
 	}
 	
 	

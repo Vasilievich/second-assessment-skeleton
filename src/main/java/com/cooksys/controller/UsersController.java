@@ -29,9 +29,8 @@ public class UsersController {
 	}
 	
 	@PostMapping
-	public Users createUser(@RequestBody DataTransferObject user) {
-		Users user = new Users(user.getCredentials(), user.getProfile(), "rightnow");
-		return userService.getCreatedUser();
+	public Users createUser(@RequestBody Users newUser) {
+		return userService.getCreatedUser(newUser);
 	}
 	
 

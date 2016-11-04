@@ -5,22 +5,27 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 
 @Entity
 public class Users {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "username")
 	private String username;
 
-	@Column(name = "firstname")
+	@Column(name = "firstname", nullable = true)
 	private String firstname;
 	
 	@Column(name = "lastname")
@@ -42,8 +47,14 @@ public class Users {
 	private boolean active;
 
 	@ManyToMany
-	@JoinTable(name = "usertweets")
+	@JoinTable(name = "usertweets",
+	joinColumns = @JoinColumn(name = "users_id"),
+	inverseJoinColumns = @JoinColumn(name = "tweet_id"))
+	@JsonIgnore
 	private List<Tweet> tweet;
+
+	public Users(){
+	}
 	
 	public Users(Credentials credential, Profile profile, String time) {
 		this.username = credential.getUsername();
@@ -54,21 +65,7 @@ public class Users {
 		this.phone = profile.getPhone();
 		this.password = credential.getPassword();
 		this.active = true;
-		
 	}
-	
-//	@ManyToMany
-//	@JoinTable
-//	private List<Hashtag> Hashtag;
- 	
-	
-//	public List<Hashtag> getHashtags() {
-//		return Hashtag;
-//	}
-//	
-//	public void setHashtags(List<Hashtag> hashtags) {
-//		Hashtag = hashtags;
-//	}
 	
 	public String getFirstname() {
 		return firstname;
@@ -150,11 +147,4 @@ public class Users {
 		this.tweet = tweets;
 	}
 
-	public Profile getProfile() {
-		return new Profile(email);
-	}
-	
-	public Credentials getCredentials() {
-		return new Credentials(username, password);
-	}
 }

@@ -5,11 +5,14 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -17,16 +20,16 @@ import java.util.List;
 public class Tweet {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column(name = "author")
 	private String author;
 	
-	@Column
+	@Column(name = "posted")
 	private String posted;
 
-	@Column
+	@Column(name = "context", nullable = true)
 	private String context;
 	
 //	@Column
@@ -35,14 +38,16 @@ public class Tweet {
 //	@Column
 //	private Tweet repostof;
 	
-	@Column
-	private boolean tweetstatus;
+	@Column(name = "tweetactive")
+	private boolean tweetactive;
 
 	@ManyToMany(mappedBy = "tweet")
+	@JsonIgnore
 	private List<Users> users;
 
 	@ManyToMany
 	@JoinTable(name = "tweethashtags")
+	@JsonIgnore
 	private List<Hashtag> hashtag;
 
 	public List<Hashtag> getHashtags() {
@@ -109,12 +114,12 @@ public class Tweet {
 //		repostof = repostOf;
 //	}
 
-	public boolean isTweetStatus() {
-		return tweetstatus;
+	public boolean isTweetActive() {
+		return tweetactive;
 	}
 
-	public void setTweetStatus(boolean tweetStatus) {
-		tweetstatus = tweetStatus;
+	public void setTweetActive(boolean tweetActive) {
+		tweetactive = tweetActive;
 	}
 
 

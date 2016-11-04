@@ -5,31 +5,35 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Hashtag {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column(name = "label")
 	private String label;
 	
-	@Column
-	private boolean hashtagstatus;
+	@Column(name = "hashtagactive")
+	private boolean hashtagactive;
 	
 	@ManyToMany(mappedBy = "hashtag")
+	@JsonIgnore
 	private List<Tweet> tweet;
 	
-	public List<Tweet> getUsers() {
+	public List<Tweet> getTweet() {
 		return tweet;
 	}
 
-	public void setUsers(List<Tweet> users) {
-		this.tweet = users;
+	public void setTweet(List<Tweet> tweets) {
+		this.tweet = tweets;
 	}
 	
 	public long getId() {
@@ -48,11 +52,11 @@ public class Hashtag {
 		this.label = label;
 	}
 
-	public boolean isHashtagStatus() {
-		return hashtagstatus;
+	public boolean isHashtagActive() {
+		return hashtagactive;
 	}
 
-	public void setHashtagStatus(boolean hashtagStatus) {
-		hashtagstatus = hashtagStatus;
+	public void setHashtagActive(boolean hashtagActive) {
+		hashtagactive = hashtagActive;
 	}
 }

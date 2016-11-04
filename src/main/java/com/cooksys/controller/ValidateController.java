@@ -20,7 +20,7 @@ public class ValidateController {
 	
 	@GetMapping("/tag/exists/{label}")
 	public boolean isTag(@PathVariable String label) {
-		return validateService.getTagsByLabel(label).isHashtagStatus();
+		return validateService.getTagsByLabel(label).isHashtagActive();
 	}
 	
 	@GetMapping("/username/exist/@{username}")

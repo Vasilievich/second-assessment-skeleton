@@ -8,5 +8,5 @@ public interface UsersService {
 	
 	public List<Users> getAll();
 	
-	
+	public Users getCreatedUser(Users user);
 }

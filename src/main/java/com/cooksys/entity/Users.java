@@ -2,14 +2,20 @@ package com.cooksys.entity;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,12 +52,73 @@ public class Users {
 	@Column(name = "active")
 	private boolean active;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "usertweets",
 	joinColumns = @JoinColumn(name = "users_id"),
 	inverseJoinColumns = @JoinColumn(name = "tweet_id"))
 	@JsonIgnore
 	private List<Tweet> tweet;
+	
+	
+	@ManyToMany
+	@JoinTable(name = "followings",
+	joinColumns = @JoinColumn(name ="following"),
+	inverseJoinColumns = @JoinColumn(name = "users"))
+	private List<Users> followings;
+	
+	@ManyToMany(mappedBy = "followings")
+	private List<Users> follower;
+	
+	
+	//insert into second_assignment.followings (users, following) values (1,3);
+	//			this user 1 has this follower user 3
+	
+	// insert into second_assignment.followers (follower, users) values (3,1);
+	//			this user 1 is following  user 3
+	
+	@ManyToMany
+	@JoinTable(name = "followers",
+	joinColumns = @JoinColumn(name ="follower"),
+	inverseJoinColumns = @JoinColumn(name = "users"))
+	private List<Users> followers;
+	
+	@ManyToMany(mappedBy = "followers")
+	private List<Users> following;
+	
+	@JsonIgnore
+	public List<Users> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<Users> followers) {
+		this.followers = followers;
+	}
+	@JsonIgnore
+	public List<Users> getFollowings() {
+		return followings;
+	}
+
+	public void setFollowings(List<Users> followings) {
+		this.followings = followings;
+	}
+	@JsonIgnore
+	public List<Users> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(List<Users> following) {
+		this.following = following;
+	}
+	@JsonIgnore
+	public List<Users> getFollower() {
+		return follower;
+	}
+
+	public void setFollower(List<Users> follower) {
+		this.follower = follower;
+	}
+
+
 
 	public Users(){
 	}
@@ -138,7 +205,7 @@ public class Users {
 	public void setActive(boolean deletestatus) {
 		this.active = deletestatus;
 	}
-
+	@JsonIgnore
 	public List<Tweet> getTweets() {
 		return tweet;
 	}

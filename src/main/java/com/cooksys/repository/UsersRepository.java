@@ -11,6 +11,7 @@ import com.cooksys.entity.Users;
 
 public interface UsersRepository extends JpaRepository <Users, Long> {
 	
+	//@Query(value = "Select * from Users", nativeQuery = true)
 	Users findByUsername(String username);
 	
 	Users findByEmail(String email);

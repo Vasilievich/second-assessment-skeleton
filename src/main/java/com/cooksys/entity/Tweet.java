@@ -11,8 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 
 import java.util.List;
 
@@ -42,14 +46,13 @@ public class Tweet {
 	private boolean tweetactive;
 
 	@ManyToMany(mappedBy = "tweet")
-	@JsonIgnore
 	private List<Users> users;
 
 	@ManyToMany
 	@JoinTable(name = "tweethashtags")
-	@JsonIgnore
 	private List<Hashtag> hashtag;
 
+	@JsonIgnore
 	public List<Hashtag> getHashtags() {
 		return hashtag;
 	}

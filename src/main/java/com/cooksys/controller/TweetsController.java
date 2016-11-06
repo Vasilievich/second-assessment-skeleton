@@ -27,7 +27,7 @@ public class TweetsController {
 	
 	@GetMapping
 	public List<Tweet> getAllTweets() {
-		return null;
+		return tweetService.getAllTweets();
 	}
 	
 	@PostMapping

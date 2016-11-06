@@ -27,3 +27,4 @@ insert into second_assignment.usertweets (users_id, tweet_id) values (2, 4);
 
 insert into second_assignment.tweethashtags (tweet_id, hashtag_id) values (1, 1);
 
+insert into second_assignment.tweetlike (tweet_id, likedby_id) values (2, 1);

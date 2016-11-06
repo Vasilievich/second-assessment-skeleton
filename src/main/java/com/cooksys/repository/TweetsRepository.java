@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cooksys.entity.Tweet;
 import com.cooksys.entity.Users;
 
-public interface TweetsRepository extends JpaRepository<Tweet, Long>{
+public interface TweetsRepository extends JpaRepository <Tweet, Long> {
 	
 	List<Tweet> findByActiveTrue();
 	
-	Tweet findById();
+	Tweet findById(Long tweetId);
 
 	@Transactional
 	Tweet saveAndFlush(Tweet tweet);

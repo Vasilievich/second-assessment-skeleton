@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -53,7 +55,6 @@ public class Users {
 	@JoinTable(name = "usertweets",
 	joinColumns = @JoinColumn(name = "users_id"),
 	inverseJoinColumns = @JoinColumn(name = "tweet_id"))
-	@JsonIgnore
 	private List<Tweet> tweet;
 	
 	
@@ -75,7 +76,23 @@ public class Users {
 	@ManyToMany(mappedBy = "followers")
 	private List<Users> following;
 	
+	@ManyToOne
+	@JoinTable(name = "tweetlike",
+	joinColumns = @JoinColumn(name = "likedby_id"),
+	inverseJoinColumns = @JoinColumn(name = "tweet_id"))
+	private Tweet tweetlike;
+	
+	@JsonIgnore
+	public Tweet getLiker() {
+		return tweetlike;
+	}
+
+	public void setLiker(Tweet liker) {
+		this.tweetlike = liker;
+	}
+
 	@Transient
+	@JsonIgnore
 	private String content;
 	
 

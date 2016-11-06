@@ -48,40 +48,36 @@ public class Tweet {
 	private boolean active;
 
 	@ManyToMany(mappedBy = "tweet")
+	@JsonIgnore
 	private List<Users> users;
 
 	@ManyToMany
 	@JoinTable(name = "tweethashtags")
 	private List<Hashtag> hashtag;
 
-	@ManyToOne
-	@JoinTable(name = "likes")
-	private Tweet userlike;
-	
-	@OneToMany(mappedBy = "likes")
-	private List<Users> liker;
-	
+	@OneToMany(mappedBy = "tweetlike")
+	private List<Users> likedby;
+		
+	public Tweet() {}
 	public Tweet(String author, String context) {
 		this.author = author;
 		this.context = context;
 		this.active = true;
 	}
 	
-	public Tweet getUserlike() {
-		return userlike;
+
+
+	public List<Users> getlikedby() {
+		return likedby;
 	}
 
-	public void setUserlike(Tweet userlike) {
-		this.userlike = userlike;
+
+
+	public void setUserlike(List<Users> likedby) {
+		this.likedby = likedby;
 	}
 
-	public List<Users> getLiker() {
-		return liker;
-	}
 
-	public void setLiker(List<Users> liker) {
-		this.liker = liker;
-	}
 
 	@JsonIgnore
 	public List<Hashtag> getHashtags() {

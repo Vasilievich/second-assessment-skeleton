@@ -2,11 +2,15 @@ package com.cooksys.serviceImp;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.cooksys.entity.Hashtag;
 import com.cooksys.entity.Tweet;
 import com.cooksys.repository.TagsRepository;
+import com.cooksys.service.TagsService;
 
-public class TagsServiceImp {
+@Service
+public class TagsServiceImp implements TagsService {
 	
 	private TagsRepository tagRepo;
 	

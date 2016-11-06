@@ -16,16 +16,18 @@ import com.cooksys.service.UsersService;
 @Service
 public class TweetsServiceImp implements TweetsService {
 	
-	Logger log = LoggerFactory.getLogger(TweetsServiceImp.class);
+
 	TweetsRepository tweetRepo;
 	TweetsCustomRepository tweetCustomRepo;
 	UsersService userServ;
+	Logger log = LoggerFactory.getLogger(TweetsServiceImp.class);
 	
 	public TweetsServiceImp(TweetsRepository tweetsRepo, TweetsCustomRepository tweetsCustomRepo, UsersService usersServ) {
 		this.tweetRepo = tweetsRepo;
 		this.tweetCustomRepo = tweetsCustomRepo;
 		this.userServ = usersServ;
 	}
+	
 //	public boolean checkUserExist(Long tweetId) {
 //		if(getTweetId(tweetId)==null)
 //				return false;
@@ -52,12 +54,12 @@ public class TweetsServiceImp implements TweetsService {
 	}
 	
 	public Tweet getTweetId(Long tweetId) {
-		if(tweetRepo.findById()==null) {
+		if(tweetRepo.findById(tweetId)==null) {
 			log.info("Tweet id {tweetId} does not exist");
 			return null;
 		}
 		else
-			return tweetRepo.findById();
+			return tweetRepo.findById(tweetId);
 	}
 	
 	public Tweet deleteTweetId(Long tweetId) {

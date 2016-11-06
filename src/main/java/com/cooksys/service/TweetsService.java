@@ -1,5 +1,15 @@
 package com.cooksys.service;
 
-public interface TweetsService {
+import java.util.List;
 
+import com.cooksys.entity.Tweet;
+
+public interface TweetsService {
+	
+	List<Tweet> getAllTweets();
+	
+	Tweet getTweetId(Long tweetId);
+	
+	Tweet deleteTweetId(Long tweetId);
+	
 }

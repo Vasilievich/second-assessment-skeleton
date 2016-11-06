@@ -12,9 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyJoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -78,39 +75,9 @@ public class Users {
 	@ManyToMany(mappedBy = "followers")
 	private List<Users> following;
 	
-	@JsonIgnore
-	public List<Users> getFollowers() {
-		return followers;
-	}
-
-	public void setFollowers(List<Users> followers) {
-		this.followers = followers;
-	}
-	@JsonIgnore
-	public List<Users> getFollowings() {
-		return followings;
-	}
-
-	public void setFollowings(List<Users> followings) {
-		this.followings = followings;
-	}
-	@JsonIgnore
-	public List<Users> getFollowing() {
-		return following;
-	}
-
-	public void setFollowing(List<Users> following) {
-		this.following = following;
-	}
-	@JsonIgnore
-	public List<Users> getFollower() {
-		return follower;
-	}
-
-	public void setFollower(List<Users> follower) {
-		this.follower = follower;
-	}
-
+	@Transient
+	private String content;
+	
 
 
 	public Users(){
@@ -208,5 +175,46 @@ public class Users {
 
 	public void setTweets(List<Tweet> tweets) {
 		this.tweet = tweets;
+	}
+	
+	@JsonIgnore
+	public List<Users> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<Users> followers) {
+		this.followers = followers;
+	}
+	@JsonIgnore
+	public List<Users> getFollowings() {
+		return followings;
+	}
+
+	public void setFollowings(List<Users> followings) {
+		this.followings = followings;
+	}
+	@JsonIgnore
+	public List<Users> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(List<Users> following) {
+		this.following = following;
+	}
+	@JsonIgnore
+	public List<Users> getFollower() {
+		return follower;
+	}
+
+	public void setFollower(List<Users> follower) {
+		this.follower = follower;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

@@ -9,13 +9,13 @@ insert into second_assignment.users (username, firstname, lastname, email, phone
 
 insert into second_assignment.hashtag (id, label, hashtagactive) values (1,'whatever', true);
 
-insert into second_assignment.tweet (author, posted, context, tweetactive) values ('yer', 'today', 'fuckyall', true);
+insert into second_assignment.tweet (author, posted, context, active) values ('yer', 'today', 'fuckyall', true);
 
-insert into second_assignment.tweet (author, posted, context, tweetactive) values ('yer', 'tomorrow', 'fuckyall2', true);
+insert into second_assignment.tweet (author, posted, context, active) values ('yer', 'tomorrow', 'fuckyall2', true);
 
-insert into second_assignment.tweet (author, posted, context, tweetactive) values ('yer', 'tomorrow', 'fuckyall3', true);
+insert into second_assignment.tweet (author, posted, context, active) values ('yer', 'tomorrow', 'fuckyall3', true);
 
-insert into second_assignment.tweet (author, posted, context, tweetactive) values ('pa', 'today', 'xaochan', true);
+insert into second_assignment.tweet (author, posted, context, active) values ('pa', 'today', 'xaochan', true);
 
 insert into second_assignment.usertweets (users_id, tweet_id) values (1, 1);
 

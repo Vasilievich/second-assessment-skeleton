@@ -1,5 +1,6 @@
 package com.cooksys.entity;
 
+import java.util.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,8 +44,8 @@ public class Tweet {
 //	@Column
 //	private Tweet repostof;
 	
-	@Column(name = "tweetactive")
-	private boolean tweetactive;
+	@Column(name = "active")
+	private boolean active;
 
 	@ManyToMany(mappedBy = "tweet")
 	private List<Users> users;
@@ -51,6 +53,35 @@ public class Tweet {
 	@ManyToMany
 	@JoinTable(name = "tweethashtags")
 	private List<Hashtag> hashtag;
+
+	@ManyToOne
+	@JoinTable(name = "likes")
+	private Tweet userlike;
+	
+	@OneToMany(mappedBy = "likes")
+	private List<Users> liker;
+	
+	public Tweet(String author, String context) {
+		this.author = author;
+		this.context = context;
+		this.active = true;
+	}
+	
+	public Tweet getUserlike() {
+		return userlike;
+	}
+
+	public void setUserlike(Tweet userlike) {
+		this.userlike = userlike;
+	}
+
+	public List<Users> getLiker() {
+		return liker;
+	}
+
+	public void setLiker(List<Users> liker) {
+		this.liker = liker;
+	}
 
 	@JsonIgnore
 	public List<Hashtag> getHashtags() {
@@ -86,11 +117,14 @@ public class Tweet {
 	}
 
 	public String getPosted() {
+		Date date = new Date();
+		this.posted = (new Timestamp(date.getTime())).toString();
 		return posted;
 	}
 
 	public void setPosted(String posted) {
-		this.posted = posted;
+		Date date = new Date();
+		this.posted = (new Timestamp(date.getTime())).toString();
 	}
 
 	public String getContext() {
@@ -118,11 +152,11 @@ public class Tweet {
 //	}
 
 	public boolean isTweetActive() {
-		return tweetactive;
+		return active;
 	}
 
 	public void setTweetActive(boolean tweetActive) {
-		tweetactive = tweetActive;
+		active = tweetActive;
 	}
 
 

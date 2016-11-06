@@ -19,9 +19,5 @@ public interface UsersRepository extends JpaRepository <Users, Long> {
 
 	@Transactional
 	Users saveAndFlush(Users user);
-	
-	@Transactional
-	@Query(value = "Insert into second_assignment.followings values (?1, ?2)", nativeQuery = true)
-	void insertIntoFollow(Long id, Long id2);
-	
+
 }

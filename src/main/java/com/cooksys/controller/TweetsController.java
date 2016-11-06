@@ -32,22 +32,23 @@ public class TweetsController {
 	
 	@PostMapping
 	public Tweet postTweet(@RequestBody Users post) {
-		return null;
+		return tweetService.postTweet(post);
 	}
 	
 	@GetMapping("/{id}")
-	public Tweet getIdTweet(@PathVariable Long tweetId) {
-		return null;
+	public Tweet getIdTweet(@PathVariable Long id) {
+		return tweetService.getTweetId(id);
 	}
 	
 	@DeleteMapping("/{id}")
-	public Tweet deleteIdTweet(@RequestBody Users user, @PathVariable Long tweetId) {
-		return null;
+	public Tweet deleteIdTweet(@RequestBody Users user, @PathVariable Long id) {
+		return tweetService.deleteTweetId(user, id);
 	}
 	
 	@PostMapping("/{id}/like")
-	public void postLikeTweet(@RequestBody Users user, @PathVariable Long tweetId) {
-		
+	public void postLikeTweet(@RequestBody Users user, @PathVariable Long id) {
+		System.out.println(id);
+		tweetService.postTweetIdLike(user, id);
 	}
 	
 	@PostMapping("/{id}/reply")

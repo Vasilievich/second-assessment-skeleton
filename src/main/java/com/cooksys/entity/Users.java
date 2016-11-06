@@ -76,18 +76,18 @@ public class Users {
 	@ManyToMany(mappedBy = "followers")
 	private List<Users> following;
 	
-	@ManyToOne
+	@ManyToMany
 	@JoinTable(name = "tweetlike",
 	joinColumns = @JoinColumn(name = "likedby_id"),
 	inverseJoinColumns = @JoinColumn(name = "tweet_id"))
-	private Tweet tweetlike;
+	private List<Tweet> tweetlike;
 	
 	@JsonIgnore
-	public Tweet getLiker() {
+	public List<Tweet> getLiker() {
 		return tweetlike;
 	}
 
-	public void setLiker(Tweet liker) {
+	public void setLiker(List<Tweet> liker) {
 		this.tweetlike = liker;
 	}
 
@@ -95,8 +95,6 @@ public class Users {
 	@JsonIgnore
 	private String content;
 	
-
-
 	public Users(){
 	}
 	

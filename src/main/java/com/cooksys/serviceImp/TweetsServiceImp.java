@@ -2,6 +2,7 @@ package com.cooksys.serviceImp;
 
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -62,11 +63,30 @@ public class TweetsServiceImp implements TweetsService {
 			return tweetRepo.findById(tweetId);
 	}
 	
-	public Tweet deleteTweetId(Long tweetId) {
-		Tweet targetTweet = getTweetId(tweetId);
-		targetTweet.setTweetActive(false);
-		return tweetRepo.saveAndFlush(targetTweet);
+	public Tweet deleteTweetId(Users user, Long tweetId) {
+		if(userServ.checkUserExist(user.getUsername())) {
+			Users targetUser = userServ.getAtUser(user.getUsername());
+			if(user.getPassword().equals(targetUser.getPassword())) {
+				Tweet targetTweet = getTweetId(tweetId);
+				targetTweet.setTweetActive(false);
+				return tweetRepo.saveAndFlush(targetTweet);
+			}
+			else {
+				log.info("Tweet id {tweetId} does not exist", tweetId);
+				return null;
+			}
+		}
+		else {
+			log.info("User don't exist");
+			 return null;
+		}
 	}
 	
+	public void postTweetIdLike(Users user, Long tweetId) { //check if you already liked
+		if(userServ.checkUserExist(user.getUsername())) {
+			Users targetUser = userServ.getAtUser(user.getUsername());
+			tweetCustomRepo.insertTweetLike(targetUser, tweetId);
+		}
+	}
 	
 }

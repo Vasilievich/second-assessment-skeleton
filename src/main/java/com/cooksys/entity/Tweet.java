@@ -55,7 +55,7 @@ public class Tweet {
 	@JoinTable(name = "tweethashtags")
 	private List<Hashtag> hashtag;
 
-	@OneToMany(mappedBy = "tweetlike")
+	@ManyToMany(mappedBy = "tweetlike")
 	private List<Users> likedby;
 		
 	public Tweet() {}

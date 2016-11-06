@@ -63,7 +63,7 @@ public class UsersController {
 	}
 	
 	@GetMapping("/@{username}/feed")
-	public Tweet getFeed(@PathVariable String username) {
+	public List<Tweet> getFeed(@PathVariable String username) {
 		return null;
 	}
 

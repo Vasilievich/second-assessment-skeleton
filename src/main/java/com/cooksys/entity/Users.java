@@ -22,7 +22,9 @@ import javax.persistence.JoinColumn;
 
 @Entity
 public class Users {
-	
+	@JsonIgnore
+	@Transient
+	private Date date = new Date();
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -43,13 +45,13 @@ public class Users {
 	private String phone;
 
 	@Column(name = "timestamps")
-	private String timestamps;
+	private String timestamps = (new Timestamp(date.getTime())).toString();
 	
 	@Column(name = "password")
 	private String password;
 	
 	@Column(name = "active")
-	private boolean active;
+	private boolean active = true;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "usertweets",
@@ -91,22 +93,11 @@ public class Users {
 		this.tweetlike = liker;
 	}
 
-	@Transient
 	@JsonIgnore
+	@Transient
 	private String content;
 	
 	public Users(){
-	}
-	
-	public Users(Credentials credential, Profile profile, String time) {
-		this.username = credential.getUsername();
-		this.email = profile.getEmail();
-		this.timestamps = time;
-		this.firstname = profile.getFirstname();
-		this.lastname = profile.getLastname();
-		this.phone = profile.getPhone();
-		this.password = credential.getPassword();
-		this.active = true;
 	}
 	
 	public String getFirstname() {
@@ -142,14 +133,11 @@ public class Users {
 	}
 
 	public String getTimestamps() {
-		Date date = new Date();
-		this.timestamps = (new Timestamp (date.getTime())).toString();
 		return timestamps;
 	}
 
 	public void setTimestamps(String timestamps) {
-		Date date = new Date();
-		this.timestamps = (new Timestamp (date.getTime())).toString();
+		this.timestamps = timestamps;
 	}
 
 	public String getPassword() {

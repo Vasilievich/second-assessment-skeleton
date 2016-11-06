@@ -23,5 +23,12 @@ public interface UsersService {
 	
 	public void postUnfollowUser(Users unfollowingUser, String atUser);
 	
-	public Tweet getAtUserFeed(String atUser);
+	public List<Tweet> getAtUserFeed(String atUser);
+	
+	public List<Tweet> getAtUserTweets(String atUser);
+	
+	public List<Users> getAtUserFollowers(String atUser);
+	
+	public List<Users> getAtUserFollowings(String atUser);
+	
 }

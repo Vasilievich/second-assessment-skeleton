@@ -35,8 +35,8 @@ public class Tweet {
 	@Column(name = "posted")
 	private String posted;
 
-	@Column(name = "context", nullable = true)
-	private String context;
+	@Column(name = "content")
+	private String content;
 	
 //	@Column
 //	private Tweet inrepyof;
@@ -59,9 +59,11 @@ public class Tweet {
 	private List<Users> likedby;
 		
 	public Tweet() {}
-	public Tweet(String author, String context) {
+	public Tweet(String author, String content) {
+		Date date = new Date();
+		this.posted = (new Timestamp(date.getTime())).toString();
 		this.author = author;
-		this.context = context;
+		this.content = content;
 		this.active = true;
 	}
 	
@@ -113,22 +115,19 @@ public class Tweet {
 	}
 
 	public String getPosted() {
-		Date date = new Date();
-		this.posted = (new Timestamp(date.getTime())).toString();
 		return posted;
 	}
 
 	public void setPosted(String posted) {
-		Date date = new Date();
-		this.posted = (new Timestamp(date.getTime())).toString();
+		this.posted = posted;
 	}
 
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
 
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 //	public Tweet getInRepyOf() {

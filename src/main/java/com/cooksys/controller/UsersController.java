@@ -64,12 +64,12 @@ public class UsersController {
 	
 	@GetMapping("/@{username}/feed")
 	public List<Tweet> getFeed(@PathVariable String username) {
-		return null;
+		return userService.getAtUserFeed(username);
 	}
 
 	@GetMapping("/@{username}/tweets")
-	public Tweet getTweets(@PathVariable String username) {
-		return null;
+	public List<Tweet> getTweets(@PathVariable String username) {
+		return userService.getAtUserTweets(username);
 	}
 	
 	@GetMapping("/@{username}/mentions")
@@ -78,12 +78,12 @@ public class UsersController {
 	}
 	
 	@GetMapping("/@{username}/followers")
-	public Users getFollowers(@PathVariable String username) {
-		return null;
+	public List<Users> getFollowers(@PathVariable String username) {
+		return userService.getAtUserFollowers(username);
 	}
 	
 	@GetMapping("/@{username}/following")
-	public Users getFollowing(@PathVariable String username) {
-		return null;
+	public List<Users> getFollowing(@PathVariable String username) {
+		return userService.getAtUserFollowings(username);
 	}
 }

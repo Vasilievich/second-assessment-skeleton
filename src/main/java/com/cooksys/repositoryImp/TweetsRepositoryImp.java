@@ -18,6 +18,7 @@ public class TweetsRepositoryImp implements TweetsCustomRepository {
 		this.em = entityManager;
 	}
 	
+	@Transactional
 	public void insertTweet(Tweet tweet) {
 		em.persist(tweet);
 	}

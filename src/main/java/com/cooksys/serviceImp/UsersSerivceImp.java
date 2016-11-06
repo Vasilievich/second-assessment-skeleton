@@ -1,5 +1,8 @@
 package com.cooksys.serviceImp;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.cooksys.entity.Tweet;
 import com.cooksys.entity.Users;
+import com.cooksys.repository.TweetsRepository;
 import com.cooksys.repository.UsersCustomRepository;
 import com.cooksys.repository.UsersRepository;
 import com.cooksys.service.UsersService;
@@ -19,13 +23,16 @@ public class UsersSerivceImp implements UsersService{
 
 	UsersRepository userRepo;
 	UsersCustomRepository userCustomRepo;
+	TweetsRepository tweetRepo;
 
 	Logger log = LoggerFactory.getLogger(UsersSerivceImp.class);
 	
 	
-	public UsersSerivceImp (UsersRepository usersRepo, 	UsersCustomRepository usersCustomRepo) {
+	public UsersSerivceImp (UsersRepository usersRepo, 	UsersCustomRepository usersCustomRepo, 	TweetsRepository tweetsRepo) {
 		this.userRepo = usersRepo;
 		this.userCustomRepo = usersCustomRepo;
+		this.tweetRepo = tweetsRepo;
+		
 	}
 	
 	public boolean checkUserExist(String username) {
@@ -126,13 +133,40 @@ public class UsersSerivceImp implements UsersService{
 		}
 	}
 	
-	public Tweet getAtUserFeed(String atUser) {
+	public List<Tweet> getAtUserFeed(String atUser) {
 		if(checkUserExist(atUser)) {
-			
+			Users targetUser = userRepo.findByUsername(atUser);
+			List<Tweet> list1 = new ArrayList<Tweet>();
+			for(Tweet tweets1 : targetUser.getTweets()) {
+				list1.add(tweets1);
+			}
+			for(Users following : targetUser.getFollowings()) {
+				for (Tweet tweets2 : following.getTweets()) {
+					list1.add(tweets2);
+				}
+			}
+			return list1;
 		}
 		return null;
 	}
 	
+	public List<Tweet> getAtUserTweets(String atUser) {
+		return tweetRepo.findByAuthorAndActiveTrue(atUser);
+	}
+
+	public List<Users> getAtUserFollowers(String atUser) {
+		if(checkUserExist(atUser)) {
+			return userRepo.findByUsername(atUser).getFollower();
+		}
+		return null;
+	}
+
+	public List<Users> getAtUserFollowings(String atUser) {
+		if(checkUserExist(atUser)) {
+			return userRepo.findByUsername(atUser).getFollowings();
+		}
+		return null;
+	}
 	
 
 }

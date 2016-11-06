@@ -17,4 +17,5 @@ public interface TweetsRepository extends JpaRepository <Tweet, Long> {
 	@Transactional
 	Tweet saveAndFlush(Tweet tweet);
 	
+	List<Tweet> findByAuthorAndActiveTrue(String author);
 }

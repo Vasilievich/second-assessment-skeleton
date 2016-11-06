@@ -1,8 +1,8 @@
 package com.cooksys.entity;
 
-import java.sql.Timestamp;
 import java.util.List;
-
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,7 +60,7 @@ public class Users {
 	private List<Tweet> tweet;
 	
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "followings",
 	joinColumns = @JoinColumn(name ="following"),
 	inverseJoinColumns = @JoinColumn(name = "users"))
@@ -68,13 +68,6 @@ public class Users {
 	
 	@ManyToMany(mappedBy = "followings")
 	private List<Users> follower;
-	
-	
-	//insert into second_assignment.followings (users, following) values (1,3);
-	//			this user 1 has this follower user 3
-	
-	// insert into second_assignment.followers (follower, users) values (3,1);
-	//			this user 1 is following  user 3
 	
 	@ManyToMany
 	@JoinTable(name = "followers",
@@ -167,11 +160,14 @@ public class Users {
 	}
 
 	public String getTimestamps() {
+		Date date = new Date();
+		this.timestamps = (new Timestamp (date.getTime())).toString();
 		return timestamps;
 	}
 
 	public void setTimestamps(String timestamps) {
-		this.timestamps = timestamps;
+		Date date = new Date();
+		this.timestamps = (new Timestamp (date.getTime())).toString();
 	}
 
 	public String getPassword() {

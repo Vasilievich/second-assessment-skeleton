@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.cooksys.entity.Tweet;
 import com.cooksys.entity.Users;
 import com.cooksys.repository.UsersCustomRepository;
 import com.cooksys.repository.UsersRepository;
@@ -103,7 +104,34 @@ public class UsersSerivceImp implements UsersService{
 		return null;
 	}
 	
+	public void postFollowUser(Users user, String atUser) {
+		if(checkUserExist(atUser) && checkUserExist(user.getUsername())) {
+			Users followingUser = getAtUser(user.getUsername());
+			Users targetUser = getAtUser(atUser); 
+			if(user.getUsername().equals(followingUser.getUsername()) &&
+					user.getPassword().equals(followingUser.getPassword())) {
+				userCustomRepo.updateUserFollowing(followingUser.getId(), targetUser.getId());				
+			}
+		}
+	}
 	
+	public void postUnfollowUser(Users user, String atUser) {
+		if(checkUserExist(atUser) && checkUserExist(user.getUsername())) {
+			Users unfollowingUser = getAtUser(user.getUsername());
+			Users targetUser = getAtUser(atUser); 
+			if(user.getUsername().equals(unfollowingUser.getUsername()) &&
+					user.getPassword().equals(unfollowingUser.getPassword())) {
+				userCustomRepo.updateUserUnfollowing(unfollowingUser.getId(), targetUser.getId());	
+			}
+		}
+	}
+	
+	public Tweet getAtUserFeed(String atUser) {
+		if(checkUserExist(atUser)) {
+			
+		}
+		return null;
+	}
 	
 	
 

@@ -53,13 +53,13 @@ public class UsersController {
 	}
 	
 	@PostMapping("/@{username}/follow")
-	public void followAtUser(@RequestBody Users followUser, @PathVariable String username) {
-		
+	public void followAtUser(@RequestBody Users followingUser, @PathVariable String username) {
+		userService.postFollowUser(followingUser, username);
 	}
 	
 	@PostMapping("/@{username}/unfollow")
 	public void unfollowAtUser(@RequestBody Users unFollowUser, @PathVariable String username) {
-		
+		userService.postUnfollowUser(unFollowUser, username);
 	}
 	
 	@GetMapping("/@{username}/feed")

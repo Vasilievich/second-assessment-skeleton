@@ -14,12 +14,9 @@ import com.cooksys.repository.UsersRepository;
 public class UsersRepositoryImp implements UsersCustomRepository{
 	
 	EntityManager entityManager;
-//	EntityTransaction entityTransaction;
-
 	
 	public UsersRepositoryImp(EntityManager em) {
 		entityManager = em;
-	//	entityTransaction = em.getTransaction();
 	}
 	
 	@Transactional
@@ -27,5 +24,17 @@ public class UsersRepositoryImp implements UsersCustomRepository{
 		entityManager.persist(newUser);
 	}
 	
+	@Transactional
+	public void updateUserFollowing(Long followingUser, Long targetUser) {					//this user is following this user
+		entityManager.createNativeQuery("Insert into second_assignment.followings values (" + followingUser + "," + targetUser + ")", Users.class).executeUpdate();
+																							//this user is followed by this user
+		entityManager.createNativeQuery("Insert into second_assignment.followers values (" + targetUser + "," + followingUser + ")", Users.class).executeUpdate();
+	}
 	
+	@Transactional
+	public void updateUserUnfollowing(Long followingUser, Long targetUser) {					//this user is following this user
+		entityManager.createNativeQuery("Delete from second_assignment.followings where followings.following = " + followingUser + " and followings.users =" + targetUser, Users.class).executeUpdate();
+																							//this user is followed by this user
+		entityManager.createNativeQuery("Delete from second_assignment.followers where followers.follower = " + targetUser + " and followers.users =" + followingUser, Users.class).executeUpdate();
+		}
 }

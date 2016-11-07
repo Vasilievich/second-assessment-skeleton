@@ -18,4 +18,12 @@ public interface TweetsService {
 	void postTweetIdLike(Users user, Long tweetId);
 	
 	Tweet postTweetIdReply(Users user, Long tweetId);
+	
+	Tweet postTweetIdRepost(Users user, Long tweetId);
+	
+	List<Users> getTweetIdLike(Long tweetId);
+	
+	List<Tweet> getTweetIdReplies(Long tweetId);
+	
+	List<Tweet> getTweetIdReposts(Long tweetId);
 }

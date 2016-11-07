@@ -58,7 +58,7 @@ public class TweetsController {
 	
 	@PostMapping("/{id}/repost")
 	public Tweet postRepostTweet(@RequestBody Users user, @PathVariable Long id) {
-		return null;
+		return tweetService.postTweetIdRepost(user, id);
 	}
 	
 	@GetMapping("/{id}/tags")
@@ -71,14 +71,19 @@ public class TweetsController {
 //		return null;
 //	}
 	
+	@GetMapping("/{id}/likes")
+	public List<Users> getIdTweetLikes(@PathVariable Long id) {
+		return tweetService.getTweetIdLike(id);
+	}
+	
 	@GetMapping("/{id}/replies")
-	public Tweet getIdTweetReplies(@PathVariable Long tweetId) {
-		return null;
+	public List<Tweet> getIdTweetReplies(@PathVariable Long id) {
+		return tweetService.getTweetIdReplies(id);
 	}
 	
 	@GetMapping("/{id}/repost")
-	public Tweet getIdTweetRepost(@PathVariable Long tweetId) {
-		return null;
+	public List<Tweet> getIdTweetRepost(@PathVariable Long id) {
+		return tweetService.getTweetIdReposts(id);
 	}
 	
 	@GetMapping("/{id}/mentions")

@@ -93,16 +93,39 @@ public class TweetsServiceImp implements TweetsService {
 	public Tweet postTweetIdReply(Users user, Long tweetId) {
 		if(userServ.checkUserExist(user.getUsername()) && !(user.getContent()==null)) {
 			Tweet newReplyTweet = postTweet(user);
-			newReplyTweet.setTweeted(getTweetId(tweetId));
-			
-//			Tweet replyToTweet = getTweetId(tweetId);
-			//replyToTweet.getReplies().add(newReplyTweet);
+			newReplyTweet.setRepliesto(getTweetId(tweetId));
 			return tweetRepo.saveAndFlush(newReplyTweet);
 		}
 		else {
 			log.info("Your credentials are incorrect or you have no message");
 			return null;
 		}
+	}
+	
+	public Tweet postTweetIdRepost(Users user, Long tweetId) {
+		if(userServ.checkUserExist(user.getUsername())) {
+			Tweet repostTweet = getTweetId(tweetId);
+			user.setContent(repostTweet.getContent());
+			Tweet newRepostTweet = postTweet(user);
+			newRepostTweet.setRepostof(repostTweet);
+			return tweetRepo.saveAndFlush(newRepostTweet);
+		}
+		else {
+			log.info("Your credentials are incorrect");
+			return null;
+		}
+	}
+	
+	public List<Users> getTweetIdLike(Long tweetId) {
+		return getTweetId(tweetId).getlikedby();
+	}
+	
+	public List<Tweet> getTweetIdReplies(Long tweetId) {
+		return getTweetId(tweetId).getReplies();
+	}
+	
+	public List<Tweet> getTweetIdReposts(Long tweetId) {
+		return getTweetId(tweetId).getReposts();
 	}
 	
 }

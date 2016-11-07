@@ -61,16 +61,38 @@ public class Tweet {
 	@ManyToOne
 	@JoinColumn
 	@JsonIgnore
-	private Tweet tweeted;
+	private Tweet repliesto;
 	
-	@OneToMany(mappedBy = "tweeted")
+	@OneToMany(mappedBy = "repliesto")
+	@JsonIgnore
 	private List<Tweet> replies;
 	
-	public Tweet getTweeted() {
-		return tweeted;
+	@ManyToOne
+	@JoinColumn
+	@JsonIgnore
+	private Tweet repostof;
+	
+	@OneToMany(mappedBy = "repostof")
+	@JsonIgnore
+	private List<Tweet> reposts;
+	
+	public Tweet getRepostof() {
+		return repostof;
 	}
-	public void setTweeted(Tweet tweeted) {
-		this.tweeted = tweeted;
+	public void setRepostof(Tweet repostof) {
+		this.repostof = repostof;
+	}
+	public List<Tweet> getReposts() {
+		return reposts;
+	}
+	public void setReposts(List<Tweet> reposts) {
+		this.reposts = reposts;
+	}
+	public Tweet getRepliesto() {
+		return repliesto;
+	}
+	public void setRepliesto(Tweet tweeted) {
+		this.repliesto = tweeted;
 	}
 	public List<Tweet> getReplies() {
 		return replies;
@@ -78,6 +100,9 @@ public class Tweet {
 	public void setReplies(List<Tweet> replies) {
 		this.replies = replies;
 	}
+	
+	
+	
 	public Tweet() {}
 	public Tweet(String author, String content) {
 		Date date = new Date();

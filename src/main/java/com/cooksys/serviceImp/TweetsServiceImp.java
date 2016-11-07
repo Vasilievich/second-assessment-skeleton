@@ -90,4 +90,19 @@ public class TweetsServiceImp implements TweetsService {
 		}
 	}
 	
+	public Tweet postTweetIdReply(Users user, Long tweetId) {
+		if(userServ.checkUserExist(user.getUsername()) && !(user.getContent()==null)) {
+			Tweet newReplyTweet = postTweet(user);
+			newReplyTweet.setTweeted(getTweetId(tweetId));
+			
+//			Tweet replyToTweet = getTweetId(tweetId);
+			//replyToTweet.getReplies().add(newReplyTweet);
+			return tweetRepo.saveAndFlush(newReplyTweet);
+		}
+		else {
+			log.info("Your credentials are incorrect or you have no message");
+			return null;
+		}
+	}
+	
 }

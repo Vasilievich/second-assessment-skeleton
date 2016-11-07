@@ -16,4 +16,6 @@ public interface TweetsService {
 	Tweet deleteTweetId(Users user,Long tweetId);
 	
 	void postTweetIdLike(Users user, Long tweetId);
+	
+	Tweet postTweetIdReply(Users user, Long tweetId);
 }

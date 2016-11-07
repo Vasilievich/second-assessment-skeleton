@@ -57,7 +57,27 @@ public class Tweet {
 
 	@ManyToMany(mappedBy = "tweetlike")
 	private List<Users> likedby;
-		
+	
+	@ManyToOne
+	@JoinColumn
+	@JsonIgnore
+	private Tweet tweeted;
+	
+	@OneToMany(mappedBy = "tweeted")
+	private List<Tweet> replies;
+	
+	public Tweet getTweeted() {
+		return tweeted;
+	}
+	public void setTweeted(Tweet tweeted) {
+		this.tweeted = tweeted;
+	}
+	public List<Tweet> getReplies() {
+		return replies;
+	}
+	public void setReplies(List<Tweet> replies) {
+		this.replies = replies;
+	}
 	public Tweet() {}
 	public Tweet(String author, String content) {
 		Date date = new Date();

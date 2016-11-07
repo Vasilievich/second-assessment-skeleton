@@ -52,12 +52,12 @@ public class TweetsController {
 	}
 	
 	@PostMapping("/{id}/reply")
-	public Tweet postReplyTweet(@RequestBody Users user, @PathVariable Long tweetId) {
-		return null;
+	public Tweet postReplyTweet(@RequestBody Users user, @PathVariable Long id) {
+		return tweetService.postTweetIdReply(user, id);
 	}
 	
 	@PostMapping("/{id}/repost")
-	public Tweet postRepostTweet(@RequestBody Users user, @PathVariable Long tweetId) {
+	public Tweet postRepostTweet(@RequestBody Users user, @PathVariable Long id) {
 		return null;
 	}
 	

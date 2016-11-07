@@ -28,14 +28,7 @@ public class TweetsServiceImp implements TweetsService {
 		this.tweetCustomRepo = tweetsCustomRepo;
 		this.userServ = usersServ;
 	}
-	
-//	public boolean checkUserExist(Long tweetId) {
-//		if(getTweetId(tweetId)==null)
-//				return false;
-//		else
-//			return true;
-//	}
-	
+
 	public List<Tweet> getAllTweets() {
 		return tweetRepo.findByActiveTrue();
 	}
@@ -66,14 +59,14 @@ public class TweetsServiceImp implements TweetsService {
 	
 	public Tweet deleteTweetId(Users user, Long tweetId) {
 		if(userServ.checkUserExist(user.getUsername())) {
-			Users targetUser = userServ.getAtUser(user.getUsername());
+			Users targetUser = userServ.getAtUser(getTweetId(tweetId).getAuthor());
 			if(user.getPassword().equals(targetUser.getPassword())) {
 				Tweet targetTweet = getTweetId(tweetId);
 				targetTweet.setTweetActive(false);
 				return tweetRepo.saveAndFlush(targetTweet);
 			}
 			else {
-				log.info("Tweet id {tweetId} does not exist", tweetId);
+				log.info("Your credentials are incorrect");
 				return null;
 			}
 		}
@@ -117,15 +110,30 @@ public class TweetsServiceImp implements TweetsService {
 	}
 	
 	public List<Users> getTweetIdLike(Long tweetId) {
-		return getTweetId(tweetId).getlikedby();
+		if(getTweetId(tweetId).isTweetActive())
+			return getTweetId(tweetId).getlikedby();
+		else {
+			log.info("this tweet has been deleted");
+			return null;
+		}
 	}
 	
 	public List<Tweet> getTweetIdReplies(Long tweetId) {
-		return getTweetId(tweetId).getReplies();
+		if(getTweetId(tweetId).isTweetActive())
+			return getTweetId(tweetId).getReplies();
+		else {
+			log.info("this tweet has been deleted");
+			return null;
+		}
 	}
 	
 	public List<Tweet> getTweetIdReposts(Long tweetId) {
-		return getTweetId(tweetId).getReposts();
+		if(getTweetId(tweetId).isTweetActive())
+			return getTweetId(tweetId).getReposts();
+		else {
+			log.info("this tweet has been deleted");
+			return null;
+		}
 	}
 	
 }

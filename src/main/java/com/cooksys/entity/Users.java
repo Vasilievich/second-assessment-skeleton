@@ -32,7 +32,7 @@ public class Users {
 	@Column(name = "username")
 	private String username;
 
-	@Column(name = "firstname", nullable = true)
+	@Column(name = "firstname")
 	private String firstname;
 	
 	@Column(name = "lastname")
@@ -203,7 +203,7 @@ public class Users {
 	public void setFollower(List<Users> follower) {
 		this.follower = follower;
 	}
-	
+
 	public String getContent() {
 		return content;
 	}

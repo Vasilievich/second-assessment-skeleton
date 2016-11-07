@@ -45,7 +45,7 @@ public class TweetsServiceImp implements TweetsService {
 			Users targetUser = userServ.getAtUser(post.getUsername());
 			if(post.getPassword().equals(targetUser.getPassword())) {
 				Tweet newTweet = new Tweet(post.getUsername(), post.getContent());
-				newTweet.setContent(post.getContent());
+				//newTweet.setContent("shiat");
 				tweetCustomRepo.insertTweet(newTweet);
 				return newTweet;
 			}

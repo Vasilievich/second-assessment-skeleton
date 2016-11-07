@@ -111,7 +111,7 @@ public class UsersSerivceImp implements UsersService{
 		return null;
 	}
 	
-	public void postFollowUser(Users user, String atUser) {
+	public void postFollowUser(Users user, String atUser) { //Same with unfollow, doesn't deal with duplicates yet
 		if(checkUserExist(atUser) && checkUserExist(user.getUsername())) {
 			Users followingUser = getAtUser(user.getUsername());
 			Users targetUser = getAtUser(atUser); 
@@ -133,7 +133,7 @@ public class UsersSerivceImp implements UsersService{
 		}
 	}
 	
-	public List<Tweet> getAtUserFeed(String atUser) {
+	public List<Tweet> getAtUserFeed(String atUser) { //not chronological order
 		if(checkUserExist(atUser)) {
 			Users targetUser = userRepo.findByUsername(atUser);
 			List<Tweet> list1 = new ArrayList<Tweet>();
@@ -150,7 +150,7 @@ public class UsersSerivceImp implements UsersService{
 		return null;
 	}
 	
-	public List<Tweet> getAtUserTweets(String atUser) {
+	public List<Tweet> getAtUserTweets(String atUser) { //not chronological order
 		return tweetRepo.findByAuthorAndActiveTrue(atUser);
 	}
 
@@ -167,6 +167,4 @@ public class UsersSerivceImp implements UsersService{
 		}
 		return null;
 	}
-	
-
 }

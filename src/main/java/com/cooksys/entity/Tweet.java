@@ -68,18 +68,14 @@ public class Tweet {
 	}
 	
 
-
+	@JsonIgnore
 	public List<Users> getlikedby() {
 		return likedby;
 	}
 
-
-
 	public void setUserlike(List<Users> likedby) {
 		this.likedby = likedby;
 	}
-
-
 
 	@JsonIgnore
 	public List<Hashtag> getHashtags() {
@@ -90,6 +86,7 @@ public class Tweet {
 		this.hashtag = hashtag;
 	}
 
+	@JsonIgnore
 	public List<Users> getUsers() {
 		return users;
 	}

@@ -84,16 +84,7 @@ public class Users {
 	inverseJoinColumns = @JoinColumn(name = "tweet_id"))
 	private List<Tweet> tweetlike;
 	
-	@JsonIgnore
-	public List<Tweet> getLiker() {
-		return tweetlike;
-	}
 
-	public void setLiker(List<Tweet> liker) {
-		this.tweetlike = liker;
-	}
-
-	@JsonIgnore
 	@Transient
 	private String content;
 	
@@ -220,4 +211,14 @@ public class Users {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	@JsonIgnore
+	public List<Tweet> getLiker() {
+		return tweetlike;
+	}
+
+	public void setLiker(List<Tweet> liker) {
+		this.tweetlike = liker;
+	}
+	
 }

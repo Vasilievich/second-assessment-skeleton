@@ -25,7 +25,6 @@ public class TweetsRepositoryImp implements TweetsCustomRepository {
 
 	@Transactional
 	public void insertTweetLike(Users user, Long tweetId) {
-		System.out.println("asdf");
 		em.createNativeQuery("Insert into second_assignment.tweetlike values (" + user.getId()+ "," + tweetId  + ")", Users.class).executeUpdate();
 	}
 	
